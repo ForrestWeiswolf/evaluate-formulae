@@ -1,11 +1,11 @@
 const evaluateFormulae = (formulae: Record<string, string>): Record<string, number> => {
-  const result = {} as Record<string, number>
+  const result = {} as Record<string, number>;
 
-  for (const key of Object.keys(formulae)) {
-    result[key] = parseInt(formulae[key])
-  }
+  Object.keys(formulae).forEach((key) => {
+    result[key] = parseInt(formulae[key], 10);
+  });
 
-  return result
-}
+  return result;
+};
 
-export default evaluateFormulae
+export default evaluateFormulae;
