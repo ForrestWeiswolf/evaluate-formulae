@@ -1,16 +1,19 @@
 {
   "extends": [
     "airbnb-base",
-    "airbnb-typescript",
+    "airbnb-typescript/base",
     "plugin:@typescript-eslint/recommended"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "sourceType": "module",
     "project": [
-      "./tsconfig.json"
-    ]
+      "./tsconfig.json",
+      "./tsconfig.eslint.json"
+    ],
+    "includes": ["src", "test"]
   },
+  "ignorePatterns": ["out/"],
   "plugins": [
     "jest"
   ],
