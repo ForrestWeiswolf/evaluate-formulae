@@ -58,4 +58,8 @@ describe('providing variables', () => {
   it('evaluates an expression with two variables', () => {
     expect(evaluateExpression('foo+bar', { foo: 1, bar: 2 })).toBe(3);
   });
+
+  it('evaluates an expression with one variable used twice', () => {
+    expect(evaluateExpression('foo*foo', { foo: 2 })).toBe(4);
+  });
 });
