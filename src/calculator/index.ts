@@ -4,11 +4,14 @@ import OperatorExpression from './OperatorExpression';
 
 export const operations = ['*', '/', '+', '-'];
 
+// TODO: pull this out to another file?
 const tokenize = (expression: string) => {
   const result = [];
   let token = '';
   for (let i = 0; i < expression.length; i++) {
-    if (/[\d,.]/.exec(expression[i])) {
+    if (/[\d,]/.exec(expression[i])) {
+      token += expression[i];
+    } else if (/\w/.exec(expression[i])) {
       token += expression[i];
     } else {
       result.push(token, expression[i]);
@@ -20,11 +23,18 @@ const tokenize = (expression: string) => {
   return result;
 };
 
-const evaluateExpression = (expression: string): number => {
+const numericExpressionFrom = (token: string, variables: Record<string, number>) => (
+  new NumericExpression(/\d+/.exec(token)
+    ? parseFloat(token)
+    : variables[token])
+);
+
+const evaluateExpression = (expression: string, variables: Record<string, number> = {}): number => {
   const tokens = tokenize(expression);
-  let tree: Expression = new NumericExpression(parseFloat(tokens[0]));
+  let tree: Expression = numericExpressionFrom(tokens[0], variables);
   let workingLeaf = tree;
 
+  // TODO: can I make this simpler somehow?
   for (let i = 1; i < tokens.length; i++) {
     if (tree instanceof NumericExpression) {
       tree = new OperatorExpression(tokens[i], [tree]);
@@ -38,14 +48,11 @@ const evaluateExpression = (expression: string): number => {
       } else {
         tree = new OperatorExpression(tokens[i], [tree]);
       }
-    } else if (
-      tree instanceof OperatorExpression && tree.children.length === 1
-    ) {
+    } else if (tree instanceof OperatorExpression && tree.children.length === 1) {
       tree.children.push(new NumericExpression(parseFloat(tokens[i])));
     } else {
       const leaf = (workingLeaf as OperatorExpression);
-
-      leaf.children.push(new NumericExpression(parseFloat(tokens[i])));
+      leaf.children.push(numericExpressionFrom(tokens[i], variables));
     }
   }
 
