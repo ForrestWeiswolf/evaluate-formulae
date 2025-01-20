@@ -1,4 +1,4 @@
-import { evaluateExpression } from "./calculator/calculator";
+import evaluateExpression from "./calculator/calculator";
 
 const evaluateFormulae = (formulae: Record<string, string>): Record<string, number> => {
   const result = {} as Record<string, number>;

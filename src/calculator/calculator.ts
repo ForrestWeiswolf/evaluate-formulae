@@ -2,6 +2,8 @@ import Expression from './Expression';
 import NumericExpression from './NumericExpression';
 import OperatorExpression from './OperatorExpression';
 
+// TODO: reconsider file name
+
 export const operations = ['*', '/', '+', '-'];
 
 const tokenize = (expression: string) => {
@@ -20,7 +22,7 @@ const tokenize = (expression: string) => {
   return result;
 };
 
-export const evaluateExpression = (expression: string): number => {
+const evaluateExpression = (expression: string): number => {
   const tokens = tokenize(expression);
   let tree: Expression = new NumericExpression(parseFloat(tokens[0]));
   let workingLeaf = tree;
@@ -51,3 +53,5 @@ export const evaluateExpression = (expression: string): number => {
 
   return tree.evaluate();
 };
+
+export default evaluateExpression;

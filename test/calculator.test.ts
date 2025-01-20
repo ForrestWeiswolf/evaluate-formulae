@@ -1,4 +1,4 @@
-import { evaluateExpression } from '../src/calculator/calculator';
+import evaluateExpression from '../src/calculator/calculator';
 
 it('handles simple multiplication', () => {
   expect(evaluateExpression('2*3')).toBe(6);
