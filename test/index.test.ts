@@ -1,7 +1,7 @@
 import evaluateFormulae from '../src/index';
-import evaluateExpression from '../src/calculator/evaluateExpression';
+import evaluateExpression from '../src/calculator/calculator';
 
-jest.mock('../src/calculator/evaluateExpression.ts');
+jest.mock('../src/calculator/calculator.ts');
 
 describe('evaluateFormulae', () => {
   it('calls evaluateExpression on each expression', () => {
