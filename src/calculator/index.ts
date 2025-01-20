@@ -36,10 +36,7 @@ const evaluateExpression = (expression: string, variables: Record<string, number
 
   // TODO: can I make this simpler somehow?
   for (let i = 1; i < tokens.length; i++) {
-    if (tree instanceof NumericExpression) {
-      tree = new OperatorExpression(tokens[i], [tree]);
-      workingLeaf = tree;
-    } else if (operations.includes(tokens[i])) {
+    if (tree instanceof OperatorExpression && operations.includes(tokens[i])) {
       const leaf = (workingLeaf as OperatorExpression);
       if (operations.indexOf(leaf.operation) > operations.indexOf(tokens[i])) {
         const lastChild = leaf.children.pop();
@@ -48,11 +45,12 @@ const evaluateExpression = (expression: string, variables: Record<string, number
       } else {
         tree = new OperatorExpression(tokens[i], [tree]);
       }
-    } else if (tree instanceof OperatorExpression && tree.children.length === 1) {
-      tree.children.push(numericExpressionFrom(tokens[i], variables));
+    } else if (tree instanceof OperatorExpression) {
+      (tree.children.length === 1 ? tree : workingLeaf as OperatorExpression)
+        .children.push(numericExpressionFrom(tokens[i], variables));
     } else {
-      const leaf = (workingLeaf as OperatorExpression);
-      leaf.children.push(numericExpressionFrom(tokens[i], variables));
+      tree = new OperatorExpression(tokens[i], [tree]);
+      workingLeaf = tree;
     }
   }
 
