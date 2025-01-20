@@ -2,8 +2,6 @@ import Expression from './Expression';
 import NumericExpression from './NumericExpression';
 import OperatorExpression from './OperatorExpression';
 
-// TODO: reconsider file name
-
 export const operations = ['*', '/', '+', '-'];
 
 const tokenize = (expression: string) => {
