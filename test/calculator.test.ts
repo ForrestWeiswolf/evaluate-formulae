@@ -50,4 +50,12 @@ describe('providing variables', () => {
   it('evalutes a variable to its provided value', () => {
     expect(evaluateExpression('numberOfCounting', { numberOfCounting: 3 })).toBe(3);
   });
+
+  it('evaluates an expression with a variable', () => {
+    expect(evaluateExpression('foo+1', { foo: 1 })).toBe(2);
+  });
+
+  it('evaluates an expression with two variables', () => {
+    expect(evaluateExpression('foo+bar', { foo: 1, bar: 2 })).toBe(3);
+  });
 });

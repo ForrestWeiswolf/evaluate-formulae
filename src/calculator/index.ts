@@ -49,7 +49,7 @@ const evaluateExpression = (expression: string, variables: Record<string, number
         tree = new OperatorExpression(tokens[i], [tree]);
       }
     } else if (tree instanceof OperatorExpression && tree.children.length === 1) {
-      tree.children.push(new NumericExpression(parseFloat(tokens[i])));
+      tree.children.push(numericExpressionFrom(tokens[i], variables));
     } else {
       const leaf = (workingLeaf as OperatorExpression);
       leaf.children.push(numericExpressionFrom(tokens[i], variables));
