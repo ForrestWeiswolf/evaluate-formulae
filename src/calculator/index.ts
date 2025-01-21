@@ -9,7 +9,7 @@ const tokenize = (expression: string) => {
   const result = [];
   let token = '';
   for (let i = 0; i < expression.length; i++) {
-    if (/[\d,]/.exec(expression[i])) {
+    if (/[\d,.]/.exec(expression[i])) {
       token += expression[i];
     } else if (/\w/.exec(expression[i])) {
       token += expression[i];

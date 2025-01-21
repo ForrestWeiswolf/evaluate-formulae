@@ -34,9 +34,14 @@ describe('simple arithmetic', () => {
     expect(evaluateExpression('2*3^2')).toBe(18);
     expect(evaluateExpression('2^3*2')).toBe(16);
   });
+
+  it('handles arithmetic involving floats', () => {
+    expect(evaluateExpression('1.5*4')).toBe(6);
+  });
+
+  // TODO: investigate best way to handle float precision (e.g. 1.5*4.4 returns 6.6000000000000005)
 });
 
-// TODO: check that it works right when floats are involved
 // TODO: validation
 
 describe('providing variables', () => {
