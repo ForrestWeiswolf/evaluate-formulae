@@ -2,7 +2,7 @@ import Expression from './Expression';
 import NumericExpression from './NumericExpression';
 import OperatorExpression from './OperatorExpression';
 
-export const operations = ['*', '/', '+', '-'];
+export const operations = ['^', '*', '/', '+', '-'];
 
 // TODO: pull this out to another file?
 const tokenize = (expression: string) => {
@@ -34,7 +34,7 @@ const evaluateExpression = (expression: string, variables: Record<string, number
   let tree: Expression = numericExpressionFrom(tokens[0], variables);
   let workingLeaf = tree;
 
-  // TODO: can I make this simpler somehow?
+  // Note that this loop starts at 1
   for (let i = 1; i < tokens.length; i++) {
     if (tree instanceof OperatorExpression && operations.includes(tokens[i])) {
       const leaf = (workingLeaf as OperatorExpression);

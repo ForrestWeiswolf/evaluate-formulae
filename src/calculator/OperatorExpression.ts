@@ -19,6 +19,8 @@ class OperatorExpression implements Expression {
 
   divide(e: Expression) { return new NumericExpression(this.evaluate() / e.evaluate()); }
 
+  exponentiate(e: Expression) { return new NumericExpression(this.evaluate() ** e.evaluate()); }
+
   evaluate(): number {
     switch (this.operation) {
       case '+':
@@ -29,6 +31,8 @@ class OperatorExpression implements Expression {
         return this.children[0].multiply(this.children[1]).evaluate();
       case '/':
         return this.children[0].divide(this.children[1]).evaluate();
+      case '^':
+        return this.children[0].exponentiate(this.children[1]).evaluate();
       default:
         return NaN;
     }

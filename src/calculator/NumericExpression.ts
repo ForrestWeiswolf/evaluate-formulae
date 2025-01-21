@@ -20,6 +20,8 @@ class NumericExpression implements Expression {
   }
 
   divide(e: Expression) { return new NumericExpression(this.evaluate() / e.evaluate()); }
+
+  exponentiate(e: Expression) { return new NumericExpression(this.evaluate() ** e.evaluate()); }
 }
 
 export default NumericExpression;

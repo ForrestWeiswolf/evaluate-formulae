@@ -3,6 +3,7 @@ interface Expression {
   subtract: (e: Expression) => Expression
   multiply: (e: Expression) => Expression
   divide: (e: Expression) => Expression
+  exponentiate: (e: Expression) => Expression
   evaluate: () => number
 }
 
