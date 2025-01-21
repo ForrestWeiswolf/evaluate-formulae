@@ -6,10 +6,19 @@ jest.mock('../src/calculator/index.ts');
 describe('evaluateFormulae', () => {
   it('calls evaluateExpression on each expression', () => {
     const evaluateExpressionMock = evaluateExpression as jest.Mock;
-
     evaluateExpressionMock.mockImplementation((expression) => (expression === '0' ? 0 : 1));
+
     expect(evaluateFormulae({ foo: '0', bar: '1+1' })).toEqual({ foo: 0, bar: 1 });
-    expect(evaluateExpressionMock).toHaveBeenCalledWith('0');
-    expect(evaluateExpressionMock).toHaveBeenCalledWith('1+1');
+  });
+
+  it('provides results of evaluating one expression as a variable to later ones', () => {
+    const evaluateExpressionMock = evaluateExpression as jest.Mock;
+    evaluateExpressionMock.mockReset();
+    evaluateExpressionMock.mockImplementation((expression) => (expression === '0' ? 0 : 1));
+
+    evaluateFormulae({ foo: '0', bar: '1+1' });
+
+    expect(evaluateExpressionMock).toHaveBeenCalledWith('0', expect.objectContaining({}));
+    expect(evaluateExpressionMock).toHaveBeenCalledWith('1+1', expect.objectContaining({ foo: 0 }));
   });
 });
