@@ -7,7 +7,6 @@ import VariableExpression from './VariableExpression';
 export const operations = ['^', '*', '/', '+', '-'];
 
 const numericOrVariableExpression = (token: string, variables: Record<string, number>) => {
-  // BUG: decimals!
   if (/\d+/.exec(token)) {
     return new NumericExpression(parseFloat(token));
   }
