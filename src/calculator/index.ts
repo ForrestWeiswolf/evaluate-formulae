@@ -5,11 +5,17 @@ import tokenize from './tokenize';
 
 export const operations = ['^', '*', '/', '+', '-'];
 
-const numericExpressionFrom = (token: string, variables: Record<string, number>) => (
-  new NumericExpression(/\d+/.exec(token)
-    ? parseFloat(token)
-    : variables[token])
-);
+const numericExpressionFrom = (token: string, variables: Record<string, number>) => {
+  // BUG: decimals!
+  if (/\d+/.exec(token)) {
+    return new NumericExpression(parseFloat(token));
+  }
+  if (variables[token] !== undefined) {
+    return new NumericExpression(variables[token]);
+  }
+
+  throw new Error(`No definition for '${token}'`);
+};
 
 const evaluateExpression = (expression: string, variables: Record<string, number> = {}): number => {
   const tokens = tokenize(expression);
