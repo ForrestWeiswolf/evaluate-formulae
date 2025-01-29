@@ -6,24 +6,23 @@ import VariableExpression from './VariableExpression';
 
 export const operations = ['^', '*', '/', '+', '-'];
 
-const numericOrVariableExpression = (token: string, variables: Record<string, number>) => {
+const numericOrVariableExpression = (token: string) => {
   if (/\d+/.exec(token)) {
     return new NumericExpression(parseFloat(token));
   }
-  if (variables[token] !== undefined) {
-    return new VariableExpression(token);
-  }
 
-  throw new Error(`No definition for '${token}'`);
+  return new VariableExpression(token);
 };
 
-const evaluateExpression = (expression: string, variables: Record<string, number> = {}): number => {
+const expressionTreeFromString = (expression: string) => {
   const tokens = tokenize(expression);
-  let tree: Expression = numericOrVariableExpression(tokens[0], variables);
+  let tree: Expression = numericOrVariableExpression(tokens[0]);
   let workingLeaf = tree;
 
   // Note that this loop starts at 1
   for (let i = 1; i < tokens.length; i++) {
+    // TODO: refactor to put an insert operation on the Expression classes
+    // instead of having all this logic here?
     if (tree instanceof OperatorExpression && operations.includes(tokens[i])) {
       const leaf = (workingLeaf as OperatorExpression);
       if (operations.indexOf(leaf.operation) > operations.indexOf(tokens[i])) {
@@ -35,12 +34,18 @@ const evaluateExpression = (expression: string, variables: Record<string, number
       }
     } else if (tree instanceof OperatorExpression) {
       (tree.children.length === 1 ? tree : workingLeaf as OperatorExpression)
-        .children.push(numericOrVariableExpression(tokens[i], variables));
+        .children.push(numericOrVariableExpression(tokens[i]));
     } else {
       tree = new OperatorExpression(tokens[i], [tree]);
       workingLeaf = tree;
     }
   }
+
+  return tree;
+};
+
+const evaluateExpression = (expression: string, variables: Record<string, number> = {}): number => {
+  const tree = expressionTreeFromString(expression);
 
   return tree.evaluate(variables);
 };
