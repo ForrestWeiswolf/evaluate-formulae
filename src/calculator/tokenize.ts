@@ -1,4 +1,3 @@
-// TODO: pull this out to another file?
 const tokenize = (expression: string) => {
   const result = [];
   let token = '';
