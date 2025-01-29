@@ -1,5 +1,5 @@
 interface Expression {
-  evaluate: () => number
+  evaluate: (definitions: Record<string, number>) => number
 }
 
 export default Expression;

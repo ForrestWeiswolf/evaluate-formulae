@@ -2,16 +2,17 @@ import Expression from './Expression';
 import NumericExpression from './NumericExpression';
 import OperatorExpression from './OperatorExpression';
 import tokenize from './tokenize';
+import VariableExpression from './VariableExpression';
 
 export const operations = ['^', '*', '/', '+', '-'];
 
-const numericExpressionFrom = (token: string, variables: Record<string, number>) => {
+const numericOrVariableExpression = (token: string, variables: Record<string, number>) => {
   // BUG: decimals!
   if (/\d+/.exec(token)) {
     return new NumericExpression(parseFloat(token));
   }
   if (variables[token] !== undefined) {
-    return new NumericExpression(variables[token]);
+    return new VariableExpression(token);
   }
 
   throw new Error(`No definition for '${token}'`);
@@ -19,7 +20,7 @@ const numericExpressionFrom = (token: string, variables: Record<string, number>)
 
 const evaluateExpression = (expression: string, variables: Record<string, number> = {}): number => {
   const tokens = tokenize(expression);
-  let tree: Expression = numericExpressionFrom(tokens[0], variables);
+  let tree: Expression = numericOrVariableExpression(tokens[0], variables);
   let workingLeaf = tree;
 
   // Note that this loop starts at 1
@@ -35,14 +36,14 @@ const evaluateExpression = (expression: string, variables: Record<string, number
       }
     } else if (tree instanceof OperatorExpression) {
       (tree.children.length === 1 ? tree : workingLeaf as OperatorExpression)
-        .children.push(numericExpressionFrom(tokens[i], variables));
+        .children.push(numericOrVariableExpression(tokens[i], variables));
     } else {
       tree = new OperatorExpression(tokens[i], [tree]);
       workingLeaf = tree;
     }
   }
 
-  return tree.evaluate();
+  return tree.evaluate(variables);
 };
 
 export default evaluateExpression;

@@ -10,18 +10,18 @@ class OperatorExpression implements Expression {
     this.children = children;
   }
 
-  evaluate(): number {
+  evaluate(definitions: Record<string, number>): number {
     switch (this.operation) {
       case '+':
-        return this.children[0].evaluate() + this.children[1].evaluate();
+        return this.children[0].evaluate(definitions) + this.children[1].evaluate(definitions);
       case '-':
-        return this.children[0].evaluate() - this.children[1].evaluate();
+        return this.children[0].evaluate(definitions) - this.children[1].evaluate(definitions);
       case '*':
-        return this.children[0].evaluate() * this.children[1].evaluate();
+        return this.children[0].evaluate(definitions) * this.children[1].evaluate(definitions);
       case '/':
-        return this.children[0].evaluate() / this.children[1].evaluate();
+        return this.children[0].evaluate(definitions) / this.children[1].evaluate(definitions);
       case '^':
-        return this.children[0].evaluate() ** this.children[1].evaluate();
+        return this.children[0].evaluate(definitions) ** this.children[1].evaluate(definitions);
       default:
         return NaN;
     }
