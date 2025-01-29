@@ -10,18 +10,6 @@ class NumericExpression implements Expression {
   evaluate() {
     return this.value;
   }
-
-  add(e: Expression) { return new NumericExpression(this.evaluate() + e.evaluate()); }
-
-  subtract(e: Expression) { return new NumericExpression(this.evaluate() - e.evaluate()); }
-
-  multiply(e: Expression) {
-    return new NumericExpression(this.evaluate() * e.evaluate());
-  }
-
-  divide(e: Expression) { return new NumericExpression(this.evaluate() / e.evaluate()); }
-
-  exponentiate(e: Expression) { return new NumericExpression(this.evaluate() ** e.evaluate()); }
 }
 
 export default NumericExpression;
