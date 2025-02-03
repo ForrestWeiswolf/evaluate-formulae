@@ -79,17 +79,9 @@ describe('insert', () => {
         new OperatorExpression('+', [new NumericExpression(2), new VariableExpression('foo')]),
       );
     });
-
-    // Inserting an operator expression when less than two children:
-    // Won't happen, I believe
-    // TODO: confirm that, and if so make it throw a 'not supported' error
   });
 
   describe('with two children', () => {
-    // Inserting a numeric / variable expression when less than two children:
-    // Won't happen, I believe
-    // TODO: confirm that, and if so make it throw an error
-
     it('inserts a higher-priority operator expression as second child, inserting existing second child on it', () => {
       // e.g during 1+2^...
       const plusExpression = new OperatorExpression('+', [new NumericExpression(1), new NumericExpression(2)]);
@@ -116,7 +108,10 @@ describe('insert', () => {
     });
   });
 
-  // Inserting a numeric / variable expression that has children:
-  // Won't happen, I believe
-  // TODO: confirm that, and if so make it throw a 'not supported' error
+  // Scenarios I believe won't happen:
+  // Inserting a numeric / variable expression when less than two children
+  // Inserting an operator expression when less than two children
+  // Inserting an operator expression that has children
+  // TODO: confirm these, and if so make it throw a 'not supported' error
+  // and/or rearrange the code to make it obvious that these cases won't occur
 });
