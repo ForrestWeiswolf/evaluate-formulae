@@ -1,4 +1,5 @@
 import Expression from './Expression';
+import OperatorExpression from './OperatorExpression';
 
 class VariableExpression implements Expression {
   name: string;
@@ -7,8 +8,8 @@ class VariableExpression implements Expression {
     this.name = name;
   }
 
-  insert(): VariableExpression {
-    return this;
+  insert(node: OperatorExpression): OperatorExpression {
+    return new OperatorExpression(node.operation, [new VariableExpression(this.name)]);
   }
 
   evaluate(definitions: Record<string, number>) {

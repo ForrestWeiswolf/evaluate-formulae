@@ -1,4 +1,5 @@
 import Expression from './Expression';
+import OperatorExpression from './OperatorExpression';
 
 class NumericExpression implements Expression {
   value: number;
@@ -7,8 +8,8 @@ class NumericExpression implements Expression {
     this.value = n;
   }
 
-  insert(): NumericExpression {
-    return this;
+  insert(node: OperatorExpression): OperatorExpression {
+    return new OperatorExpression(node.operation, [new NumericExpression(this.value)]);
   }
 
   evaluate() {

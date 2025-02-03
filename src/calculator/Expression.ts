@@ -1,6 +1,8 @@
+import OperatorExpression from './OperatorExpression';
+
 interface Expression {
   evaluate: (definitions: Record<string, number>) => number
-  insert: (node: Expression) => Expression
+  insert: (node: OperatorExpression) => Expression
 }
 
 export default Expression;

@@ -7,7 +7,7 @@ class OperatorExpression implements Expression {
 
   children: Expression[];
 
-  constructor(operation: string, children: Expression[]) {
+  constructor(operation: string, children: Expression[] = []) {
     this.operation = operation;
     this.children = children;
   }

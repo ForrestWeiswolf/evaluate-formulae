@@ -57,7 +57,7 @@ describe('evaluate', () => {
 describe('insert', () => {
   describe('with less than two children', () => {
     it('inserts a numeric expression as child if it has no children', () => {
-      const operatorExpression = new OperatorExpression('+', []);
+      const operatorExpression = new OperatorExpression('+');
 
       expect(operatorExpression.insert(new NumericExpression(1))).toEqual(
         new OperatorExpression('+', [new NumericExpression(1)]),
@@ -93,7 +93,7 @@ describe('insert', () => {
     it('inserts a higher-priority operator expression as second child, inserting existing second child on it', () => {
       // e.g during 1+2^...
       const plusExpression = new OperatorExpression('+', [new NumericExpression(1), new NumericExpression(2)]);
-      const powerExpression = new OperatorExpression('^', []);
+      const powerExpression = new OperatorExpression('^');
 
       expect(plusExpression.insert(powerExpression)).toEqual(
         new OperatorExpression('+', [
@@ -106,7 +106,7 @@ describe('insert', () => {
     it('inserts a lower-precedence operator expression as new root', () => {
       // e.g during 2^3+...
       const powerExpression = new OperatorExpression('^', [new NumericExpression(2), new NumericExpression(3)]);
-      const plusExpression = new OperatorExpression('+', []);
+      const plusExpression = new OperatorExpression('+');
 
       expect(powerExpression.insert(plusExpression)).toEqual(
         new OperatorExpression('+', [
