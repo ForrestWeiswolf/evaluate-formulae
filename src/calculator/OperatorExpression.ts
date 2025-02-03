@@ -25,6 +25,11 @@ class OperatorExpression implements Expression {
       ]);
     }
 
+    if (this.children[1] instanceof OperatorExpression) {
+      return new OperatorExpression(this.operation, [
+        this.children[0], this.children[1].insert(node),
+      ]);
+    }
     return new OperatorExpression(this.operation, [...this.children, node]);
   }
 

@@ -106,6 +106,24 @@ describe('insert', () => {
         ]),
       );
     });
+
+    describe('when second child is an operator expression', () => {
+      it('inserts a numeric expression on its last child', () => {
+        // e.g during 1+2*3
+        const expression = new OperatorExpression('*', [
+          new NumericExpression(1), new OperatorExpression('*', [
+            new NumericExpression(2),
+          ])]);
+
+        expect(expression.insert(new NumericExpression(3))).toEqual(
+          new OperatorExpression('*', [
+            new NumericExpression(1), new OperatorExpression('*', [
+              new NumericExpression(2),
+              new NumericExpression(3),
+            ])]),
+        );
+      });
+    });
   });
 
   // Scenarios I believe won't happen:
