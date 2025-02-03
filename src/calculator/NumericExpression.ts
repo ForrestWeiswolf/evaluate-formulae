@@ -7,6 +7,10 @@ class NumericExpression implements Expression {
     this.value = n;
   }
 
+  insert(): NumericExpression {
+    return this;
+  }
+
   evaluate() {
     return this.value;
   }

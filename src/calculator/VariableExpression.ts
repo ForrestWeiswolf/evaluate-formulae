@@ -7,6 +7,10 @@ class VariableExpression implements Expression {
     this.name = name;
   }
 
+  insert(): VariableExpression {
+    return this;
+  }
+
   evaluate(definitions: Record<string, number>) {
     if (definitions[this.name] === undefined) {
       throw new Error(`No definition for '${this.name}'`);
