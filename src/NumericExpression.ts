@@ -15,6 +15,11 @@ class NumericExpression implements Expression {
   evaluate() {
     return this.value;
   }
+
+  // eslint-disable-next-line class-methods-use-this
+  getVariables(): Set<string> {
+    return new Set();
+  }
 }
 
 export default NumericExpression;

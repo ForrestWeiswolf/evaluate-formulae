@@ -19,6 +19,10 @@ class VariableExpression implements Expression {
 
     return definitions[this.name];
   }
+
+  getVariables(): Set<string> {
+    return new Set([this.name]);
+  }
 }
 
 export default VariableExpression;

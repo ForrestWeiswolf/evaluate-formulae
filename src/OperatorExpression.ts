@@ -49,6 +49,10 @@ class OperatorExpression implements Expression {
         return NaN;
     }
   }
+
+  getVariables(): Set<string> {
+    return new Set([...this.children[0].getVariables(), ...this.children[1].getVariables()]);
+  }
 }
 
 export default OperatorExpression;

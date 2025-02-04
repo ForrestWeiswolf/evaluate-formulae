@@ -147,3 +147,14 @@ describe('insert', () => {
   // TODO: confirm these, and if so make it throw a 'not supported' error
   // and/or rearrange the code to make it obvious that these cases won't occur
 });
+
+describe('getVariables', () => {
+  it('returns Set of all children\'s variables', () => {
+    const expression = new OperatorExpression('+', [
+      new VariableExpression('foo'),
+      new OperatorExpression('*', [new VariableExpression('bar'), new VariableExpression('foo')]),
+    ]);
+
+    expect(expression.getVariables()).toEqual(new Set(['foo', 'bar']));
+  });
+});

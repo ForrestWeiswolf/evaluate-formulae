@@ -11,3 +11,9 @@ it('makes an OperatorExpression makes the new root when insert is called with on
 
   expect(expression.insert(new OperatorExpression('*'))).toEqual(new OperatorExpression('*', [expression]));
 });
+
+it('getVariables returns set with variable name', () => {
+  const expression = new VariableExpression('foo');
+
+  expect(expression.getVariables()).toEqual(new Set(['foo']));
+});
