@@ -18,27 +18,15 @@ const numericOrVariableExpression = (token: string) => {
 const expressionTreeFromString = (expression: string) => {
   const tokens = tokenize(expression);
   let tree: Expression = numericOrVariableExpression(tokens[0]);
-  let workingLeaf = tree;
 
   // Note that this loop starts at 1
   for (let i = 1; i < tokens.length; i++) {
-    // TODO: refactor to put an insert operation on the Expression classes
-    // instead of having all this logic here?
-    if (tree instanceof OperatorExpression && operations.includes(tokens[i])) {
-      const leaf = (workingLeaf as OperatorExpression);
-      if (operations.indexOf(leaf.operation) > operations.indexOf(tokens[i])) {
-        const lastChild = leaf.children.pop();
-        leaf.children.push(new OperatorExpression(tokens[i], [lastChild!]));
-        workingLeaf = leaf.children[leaf.children.length - 1];
-      } else {
-        tree = new OperatorExpression(tokens[i], [tree]);
-      }
+    if (operations.includes(tokens[i])) {
+      tree = tree.insert(new OperatorExpression(tokens[i]));
     } else if (tree instanceof OperatorExpression) {
-      (tree.children.length === 1 ? tree : workingLeaf as OperatorExpression)
-        .children.push(numericOrVariableExpression(tokens[i]));
+      tree = tree.insert(numericOrVariableExpression(tokens[i]));
     } else {
-      tree = new OperatorExpression(tokens[i], [tree]);
-      workingLeaf = tree;
+      tree = tree.insert(new OperatorExpression(tokens[i]));
     }
   }
 
