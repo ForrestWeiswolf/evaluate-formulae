@@ -1,4 +1,4 @@
-import Expression from './Expression';
+import type Expression from './Expression';
 
 const operations = ['^', '*', '/', '+', '-'];
 

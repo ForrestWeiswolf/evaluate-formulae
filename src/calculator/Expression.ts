@@ -1,4 +1,4 @@
-import OperatorExpression from './OperatorExpression';
+import type OperatorExpression from './OperatorExpression';
 
 interface Expression {
   evaluate: (definitions: Record<string, number>) => number
