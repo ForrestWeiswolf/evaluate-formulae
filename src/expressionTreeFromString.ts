@@ -6,7 +6,7 @@ import VariableExpression from './VariableExpression';
 
 export const operations = ['^', '*', '/', '+', '-'];
 
-const tokenToExpression = (token: string) => {
+const expressionFromToken = (token: string) => {
   // todo: handle negative numbers
   if (/\d+/.exec(token)) {
     return new NumericExpression(parseFloat(token));
@@ -17,12 +17,12 @@ const tokenToExpression = (token: string) => {
 
 const expressionTreeFromString = (expression: string) => {
   const tokens = tokenize(expression);
-  let tree: Expression = tokenToExpression(tokens[0]);
+  let tree: Expression = expressionFromToken(tokens[0]);
 
   // Note that this loop starts at 1
   for (let i = 1; i < tokens.length; i++) {
     if (!operations.includes(tokens[i]) && tree instanceof OperatorExpression) {
-      tree = tree.insert(tokenToExpression(tokens[i]));
+      tree = tree.insert(expressionFromToken(tokens[i]));
     } else {
       tree = tree.insert(new OperatorExpression(tokens[i]));
     }
