@@ -1,8 +1,8 @@
 import Expression from './Expression';
 import NumericExpression from './NumericExpression';
 import OperatorExpression from './OperatorExpression';
-import tokenize from './tokenize';
 import VariableExpression from './VariableExpression';
+import tokenize from './tokenize';
 
 export const operations = ['^', '*', '/', '+', '-'];
 
