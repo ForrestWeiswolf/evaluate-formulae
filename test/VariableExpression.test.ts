@@ -1,5 +1,5 @@
-import OperatorExpression from '../src/calculator/OperatorExpression';
-import VariableExpression from '../src/calculator/VariableExpression';
+import OperatorExpression from '../src/OperatorExpression';
+import VariableExpression from '../src/VariableExpression';
 
 it('evaluates to the value matching the name was constructed with', () => {
   const expression = new VariableExpression('foo');

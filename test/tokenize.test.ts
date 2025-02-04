@@ -1,4 +1,4 @@
-import tokenize from '../src/calculator/tokenize';
+import tokenize from '../src/tokenize';
 
 it('returns a single number in a length-1 array', () => {
   expect(tokenize('1')).toEqual(['1']);

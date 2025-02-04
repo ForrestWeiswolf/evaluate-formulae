@@ -1,6 +1,6 @@
-import NumericExpression from '../src/calculator/NumericExpression';
-import OperatorExpression from '../src/calculator/OperatorExpression';
-import VariableExpression from '../src/calculator/VariableExpression';
+import NumericExpression from '../src/NumericExpression';
+import OperatorExpression from '../src/OperatorExpression';
+import VariableExpression from '../src/VariableExpression';
 
 describe('evaluate', () => {
   describe('arithmetic with numeric expressions', () => {

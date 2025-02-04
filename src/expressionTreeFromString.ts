@@ -31,10 +31,4 @@ const expressionTreeFromString = (expression: string) => {
   return tree;
 };
 
-const evaluateExpression = (expression: string, variables: Record<string, number> = {}): number => {
-  const tree = expressionTreeFromString(expression);
-
-  return tree.evaluate(variables);
-};
-
-export default evaluateExpression;
+export default expressionTreeFromString;
