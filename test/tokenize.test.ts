@@ -13,5 +13,5 @@ it('treats a number with multiple digits and a decimal as a single token', () =>
 });
 
 it('treats a variable consisting of letters as a single token', () => {
-  expect(tokenize('2+a')).toEqual(['2', '+', 'a']);
+  expect(tokenize('2+foo')).toEqual(['2', '+', 'foo']);
 });
