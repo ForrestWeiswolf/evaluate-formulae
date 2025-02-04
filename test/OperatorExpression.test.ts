@@ -107,6 +107,20 @@ describe('insert', () => {
       );
     });
 
+    it('inserts an equal-precedence operator expression as new root', () => {
+      // e.g during 3-2-...
+      const powerExpression = new OperatorExpression('-', [
+        new NumericExpression(3), new NumericExpression(2),
+      ]);
+      const plusExpression = new OperatorExpression('-');
+
+      expect(powerExpression.insert(plusExpression)).toEqual(
+        new OperatorExpression('-', [
+          new OperatorExpression('-', [new NumericExpression(3), new NumericExpression(2)]),
+        ]),
+      );
+    });
+
     describe('when second child is an operator expression', () => {
       it('inserts a numeric expression on its last child', () => {
         // e.g during 1+2*3

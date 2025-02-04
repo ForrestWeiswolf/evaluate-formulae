@@ -15,7 +15,7 @@ class OperatorExpression implements Expression {
   insert(node: Expression): OperatorExpression {
     // todo: make sure everything deep copies?
     if (node instanceof OperatorExpression) {
-      if (operations.indexOf(this.operation) < operations.indexOf(node.operation)) {
+      if (operations.indexOf(this.operation) <= operations.indexOf(node.operation)) {
         return new OperatorExpression(node.operation, [
           new OperatorExpression(this.operation, [...this.children]),
         ]);
