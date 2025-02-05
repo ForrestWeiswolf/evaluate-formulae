@@ -22,4 +22,8 @@ describe('evaluateFormulae', () => {
   it('throws an error if a nonexistent formula is referenced as a variable', () => {
     expect(() => evaluateFormulae({ foo: 'nonesuch' })).toThrow("No definition for 'nonesuch'");
   });
+
+  it('provides referenced expressions as variables regardless of expression order', () => {
+    expect(evaluateFormulae({ a: 'b+1', b: '1', c: 'b+a' })).toEqual({ a: 2, b: 1, c: 3 });
+  });
 });
