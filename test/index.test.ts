@@ -8,7 +8,7 @@ describe('evaluateFormulae', () => {
   it('evaluates expressions with decimals', () => {
     expect(evaluateFormulae({ foo: '1.1+2.2' })).toEqual({ foo: 1.1 + 2.2 });
     // TODO: consider how to handle float precision
-    // (see similar comment in calculator.test.ts)
+    // (see similar comment in expressionTreeFromString.test.ts)
   });
 
   it('evaluates expressions with multiple operations', () => {
