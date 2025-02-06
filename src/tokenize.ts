@@ -1,21 +1,17 @@
 const tokenize = (expression: string) => {
   const result = [];
-
-  const matchers = [
-    /^\d+(\.\d+)?/, /^[+/\-*^]/, /^\w+/,
-  ];
-
-  let i = 0;
-  while (i < expression.length) {
-    let match;
-    for (let j = 0; j < matchers.length && !match; j++) {
-      match = matchers[j].exec(expression.slice(i));
-      if (match) {
-        result.push(match[0]);
-        i += match[0].length;
-      }
+  let token = '';
+  for (let i = 0; i < expression.length; i++) {
+    if (/[\d.]/.exec(expression[i])) {
+      token += expression[i];
+    } else if (/\w/.exec(expression[i])) {
+      token += expression[i];
+    } else {
+      result.push(token, expression[i]);
+      token = '';
     }
   }
+  result.push(token);
 
   return result;
 };
