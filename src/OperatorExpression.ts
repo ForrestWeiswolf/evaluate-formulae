@@ -1,6 +1,5 @@
 import type Expression from './Expression';
-
-const operations = ['^', '*', '/', '+', '-'];
+import operations from './operations';
 
 class OperatorExpression implements Expression {
   operation: string;

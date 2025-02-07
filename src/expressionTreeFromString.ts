@@ -2,9 +2,8 @@ import Expression from './Expression';
 import NumericExpression from './NumericExpression';
 import OperatorExpression from './OperatorExpression';
 import VariableExpression from './VariableExpression';
+import operations from './operations';
 import tokenize from './tokenize';
-
-export const operations = ['^', '*', '/', '+', '-'];
 
 const expressionFromToken = (token: string) => {
   // todo: handle negative numbers
