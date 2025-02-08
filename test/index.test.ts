@@ -15,6 +15,10 @@ describe('evaluateFormulae', () => {
     expect(evaluateFormulae({ foo: '2*2+4-3' })).toEqual({ foo: 5 });
   });
 
+  it('evaluates expressions with negative numbers', () => {
+    expect(evaluateFormulae({ foo: '-1*-1' })).toEqual({ foo: 1 });
+  });
+
   it('provides results of evaluating one expression as a variable to later ones', () => {
     expect(evaluateFormulae({ foo: '0', bar: 'foo+1' })).toEqual({ foo: 0, bar: 1 });
   });
