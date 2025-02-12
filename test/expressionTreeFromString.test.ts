@@ -39,6 +39,10 @@ describe('simple arithmetic', () => {
     expect(expressionTreeFromString('1.5*4').evaluate({})).toBe(6);
     // TODO: consider how to handle float precision (e.g. 1.5*4.4 returns 6.6000000000000005)
   });
+
+  it('handles arithmetic involving negative numbers', () => {
+    expect(expressionTreeFromString('-1*-2').evaluate({})).toBe(2);
+  });
 });
 
 // TODO: validation

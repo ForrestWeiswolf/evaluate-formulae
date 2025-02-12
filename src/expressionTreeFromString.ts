@@ -6,7 +6,6 @@ import operations from './operations';
 import tokenize from './tokenize';
 
 const expressionFromToken = (token: string) => {
-  // todo: handle negative numbers
   if (/\d+/.exec(token)) {
     return new NumericExpression(parseFloat(token));
   }
