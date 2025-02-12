@@ -8,8 +8,12 @@ class VariableExpression implements Expression {
     this.name = name;
   }
 
-  insert(node: OperatorExpression): OperatorExpression {
-    return new OperatorExpression(node.operation, [new VariableExpression(this.name)]);
+  insert(node: Expression): OperatorExpression {
+    if (node instanceof OperatorExpression) {
+      return new OperatorExpression(node.operation, [new VariableExpression(this.name)]);
+    }
+
+    throw new Error('not supported');
   }
 
   evaluate(definitions: Record<string, number>) {

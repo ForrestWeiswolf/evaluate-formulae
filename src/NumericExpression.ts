@@ -8,8 +8,12 @@ class NumericExpression implements Expression {
     this.value = n;
   }
 
-  insert(node: OperatorExpression): OperatorExpression {
-    return new OperatorExpression(node.operation, [new NumericExpression(this.value)]);
+  insert(node: Expression): OperatorExpression {
+    if (node instanceof OperatorExpression) {
+      return new OperatorExpression(node.operation, [new NumericExpression(this.value)]);
+    }
+
+    throw new Error('not supported');
   }
 
   evaluate() {
