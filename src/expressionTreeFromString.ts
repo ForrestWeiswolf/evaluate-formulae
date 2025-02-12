@@ -13,20 +13,19 @@ const expressionFromToken = (token: string) => {
   return new VariableExpression(token);
 };
 
-const expressionTreeFromString = (expression: string) => {
+const expressionTreeFromString = (expression: string): Expression => {
   const tokens = tokenize(expression);
-  let tree: Expression = expressionFromToken(tokens[0]);
+  let tree: Expression | null = null;
 
-  // Note that this loop starts at 1
-  for (let i = 1; i < tokens.length; i++) {
+  for (let i = 0; i < tokens.length; i++) {
     if (!operations.includes(tokens[i]) && tree instanceof OperatorExpression) {
       tree = tree.insert(expressionFromToken(tokens[i]));
     } else {
-      tree = tree.insert(new OperatorExpression(tokens[i]));
+      tree = tree ? tree.insert(new OperatorExpression(tokens[i])) : expressionFromToken(tokens[0]);
     }
   }
 
-  return tree;
+  return tree!;
 };
 
 export default expressionTreeFromString;
