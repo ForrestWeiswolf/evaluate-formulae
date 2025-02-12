@@ -24,3 +24,7 @@ it('does not consider a minus operator part of a number', () => {
 it('treats a variable consisting of letters as a single token', () => {
   expect(tokenize('2+foo')).toEqual(['2', '+', 'foo']);
 });
+
+it('treats each paren as a token', () => {
+  expect(tokenize('(1)+1')).toEqual(['(', '1', ')', '+', '1']);
+});

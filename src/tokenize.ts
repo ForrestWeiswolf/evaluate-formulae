@@ -9,10 +9,13 @@ const tokenize = (expression: string) => {
       && (i === 0 || operations.includes(result[result.length - 1]))
     ) {
       token += expression[i];
-    } else if (operations.includes(expression[i])) {
-      result.push(token, expression[i]);
-      token = '';
-    } else if (/[\d.]/.exec(expression[i]) || /\w/.exec(expression[i])) {
+    } else if (operations.includes(expression[i]) || /[()]/.exec(expression[i])) {
+      if (token !== '') {
+        result.push(token);
+        token = '';
+      }
+      result.push(expression[i]);
+    } else if (/[\d.\w]/.exec(expression[i])) {
       token += expression[i];
     }
   }
