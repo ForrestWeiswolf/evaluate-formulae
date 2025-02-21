@@ -13,7 +13,7 @@ class NumericExpression implements Expression {
       return new OperatorExpression(node.operation, [new NumericExpression(this.value)]);
     }
 
-    throw new Error('not supported');
+    throw new Error(`Inserting a ${node.constructor.name} after a NumericExpression is not supported`);
   }
 
   evaluate() {

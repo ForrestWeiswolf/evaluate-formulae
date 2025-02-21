@@ -13,7 +13,7 @@ class VariableExpression implements Expression {
       return new OperatorExpression(node.operation, [new VariableExpression(this.name)]);
     }
 
-    throw new Error('not supported');
+    throw new Error(`Inserting a ${node.constructor.name} after a VariableExpression is not supported`);
   }
 
   evaluate(definitions: Record<string, number>) {
