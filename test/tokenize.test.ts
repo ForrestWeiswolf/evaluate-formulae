@@ -26,5 +26,5 @@ it('treats a variable consisting of letters as a single token', () => {
 });
 
 it('treats each paren as a token', () => {
-  expect(tokenize('(1)+1')).toEqual(['(', '1', ')', '+', '1']);
+  expect(tokenize('(1+1)')).toEqual(['(', '1', '+', '1', ')']);
 });

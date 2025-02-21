@@ -19,7 +19,10 @@ const tokenize = (expression: string) => {
       token += expression[i];
     }
   }
-  result.push(token);
+
+  if (token.length) {
+    result.push(token);
+  }
 
   return result;
 };
