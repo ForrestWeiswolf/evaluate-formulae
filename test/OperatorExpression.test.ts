@@ -1,6 +1,7 @@
 import NumericExpression from '../src/NumericExpression';
 import OperatorExpression from '../src/OperatorExpression';
 import VariableExpression from '../src/VariableExpression';
+import ParentheticalExpression from '../src/ParentheticalExpression';
 
 describe('evaluate', () => {
   describe('arithmetic with numeric expressions', () => {
@@ -77,6 +78,16 @@ describe('insert', () => {
 
       expect(operatorExpression.insert(new VariableExpression('foo'))).toEqual(
         new OperatorExpression('+', [new NumericExpression(2), new VariableExpression('foo')]),
+      );
+    });
+
+    it('inserts a parenthetical expression as second child if it has one child', () => {
+      const operatorExpression = new OperatorExpression('+', [new NumericExpression(2)]);
+
+      expect(
+        operatorExpression.insert(new ParentheticalExpression(new NumericExpression(1))),
+      ).toEqual(
+        new OperatorExpression('+', [new NumericExpression(2), new ParentheticalExpression(new NumericExpression(1))]),
       );
     });
   });
