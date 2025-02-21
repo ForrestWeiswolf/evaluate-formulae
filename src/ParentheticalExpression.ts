@@ -3,13 +3,24 @@ import Expression from './Expression';
 class ParentheticalExpression implements Expression {
   child?: Expression;
 
-  constructor(child?: Expression) {
+  private closed: boolean;
+
+  constructor(child?: Expression, closed = false) {
     if (child) {
       this.child = child;
     }
+    this.closed = closed;
   }
 
-  insert(node: Expression): ParentheticalExpression {
+  close(): ParentheticalExpression {
+    return new ParentheticalExpression(this.child, true);
+  }
+
+  insert(node: Expression): Expression {
+    if (this.closed) {
+      return node.insert(this);
+    }
+
     if (!this.child) {
       return new ParentheticalExpression(node);
     }

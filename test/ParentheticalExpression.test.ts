@@ -20,18 +20,34 @@ it('getVariables returns child\'s variables', () => {
 });
 
 describe('insert', () => {
-  it('inserts node as child if it had none', () => {
-    const expression = new ParentheticalExpression();
+  describe('when open', () => {
+    it('inserts node as child if it had none', () => {
+      const expression = new ParentheticalExpression();
 
-    expect(expression.insert(new NumericExpression(1)))
-      .toEqual(new ParentheticalExpression(new NumericExpression(1)));
+      expect(expression.insert(new NumericExpression(1)))
+        .toEqual(new ParentheticalExpression(new NumericExpression(1)));
+    });
+
+    it('replaces child with result of calling child\'s insert', () => {
+      const expression = new ParentheticalExpression(new OperatorExpression('+'));
+
+      const expected = new ParentheticalExpression(new OperatorExpression('+', [new NumericExpression(1)]));
+      expect(expression.insert(new NumericExpression(1))).toEqual(expected);
+    });
   });
 
-  it('replaces child with result of calling child\'s insert', () => {
-    const expression = new ParentheticalExpression(new OperatorExpression('+'));
+  describe('when closed', () => {
+    it('inserts an OperatorExpression as new root', () => {
+      // (1)+...
+      const expression = new ParentheticalExpression(new NumericExpression(1));
 
-    expect(expression.insert(new NumericExpression(1))).toEqual(
-      new ParentheticalExpression(new OperatorExpression('+', [new NumericExpression(1)])),
-    );
+      const expected = new OperatorExpression('+', [
+        new ParentheticalExpression(new NumericExpression(1), true),
+      ]);
+
+      expect(expression.close().insert(new OperatorExpression('+'))).toEqual(expected);
+    });
+
+    // TODO: error if inserting a numeric when closed
   });
 });
