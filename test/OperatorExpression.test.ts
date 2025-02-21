@@ -149,6 +149,22 @@ describe('insert', () => {
         );
       });
     });
+
+    describe('when second child is an unclosed parenthetical expression', () => {
+      it('inserts a numeric expression on its last child', () => {
+        // e.g during 3*(2+1)
+        const expression = new OperatorExpression('*', [
+          new NumericExpression(3), new ParentheticalExpression(new NumericExpression(2)),
+        ]);
+
+        expect(expression.insert(new OperatorExpression('+'))).toEqual(
+          new OperatorExpression('*', [
+            new NumericExpression(3),
+            new ParentheticalExpression(new OperatorExpression('+', [new NumericExpression(2)])),
+          ]),
+        );
+      });
+    });
   });
 
   // Scenarios I believe won't happen:

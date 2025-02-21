@@ -64,3 +64,11 @@ describe('providing variables', () => {
     expect(expressionTreeFromString('foo*foo').evaluate({ foo: 2 })).toBe(4);
   });
 });
+
+describe('parentheses', () => {
+  it('evaulates parentheticals first', () => {
+    expect(expressionTreeFromString('2*(1+1)').evaluate({})).toBe(4);
+    // expect(expressionTreeFromString('(1+1)*2').evaluate({})).toBe(4);
+  });
+  // TODO: nested parens
+});

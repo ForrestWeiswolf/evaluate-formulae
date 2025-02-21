@@ -1,5 +1,6 @@
 import type Expression from './Expression';
 import operations from './operations';
+import ParentheticalExpression from './ParentheticalExpression';
 
 class OperatorExpression implements Expression {
   operation: string;
@@ -13,6 +14,12 @@ class OperatorExpression implements Expression {
 
   insert(node: Expression): OperatorExpression {
     // todo: make sure everything deep copies?
+    if (this.children[1] instanceof ParentheticalExpression) {
+      return new OperatorExpression(this.operation, [
+        this.children[0], this.children[1].insert(node),
+      ]);
+    }
+
     if (node instanceof OperatorExpression) {
       if (operations.indexOf(this.operation) <= operations.indexOf(node.operation)) {
         return new OperatorExpression(node.operation, [
