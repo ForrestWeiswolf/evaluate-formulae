@@ -76,3 +76,9 @@ describe('parentheses', () => {
     expect(expressionTreeFromString('2*(1+(2+2))').evaluate({})).toBe(10);
   });
 });
+
+describe('functions', () => {
+  it('handles custom unary functions passed in', () => {
+    expect(expressionTreeFromString('1+double(1+2)').evaluate({}, { double: (x) => x * 2 })).toBe(7);
+  });
+});
