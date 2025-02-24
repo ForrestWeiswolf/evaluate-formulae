@@ -3,6 +3,13 @@ import OperatorExpression from '../src/OperatorExpression';
 import VariableExpression from '../src/VariableExpression';
 import ParentheticalExpression from '../src/ParentheticalExpression';
 
+it('throws an error if created with a non-operator', () => {
+  expect(() => {
+    // eslint-disable-next-line no-new
+    new OperatorExpression('z');
+  }).toThrow('Cannot create OperatorExpression - "z" is not a known operator');
+});
+
 describe('evaluate', () => {
   describe('arithmetic with numeric expressions', () => {
     it('if constructed with the + operator, evaluates to the result of adding two NumericExpressions', () => {

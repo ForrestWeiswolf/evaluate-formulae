@@ -8,6 +8,9 @@ class OperatorExpression implements Expression {
   children: Expression[];
 
   constructor(operation: string, children: Expression[] = []) {
+    if (!operations.includes(operation)) {
+      throw new Error(`Cannot create OperatorExpression - "${operation}" is not a known operator`);
+    }
     this.operation = operation;
     this.children = children;
   }
