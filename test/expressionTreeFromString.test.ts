@@ -70,5 +70,9 @@ describe('parentheses', () => {
     expect(expressionTreeFromString('2*(1+1)').evaluate({})).toBe(4);
     expect(expressionTreeFromString('(1+1)*2').evaluate({})).toBe(4);
   });
-  // TODO: nested parens
+
+  it('handles nested parentheticals ', () => {
+    expect(expressionTreeFromString('((1+1)*2)-1').evaluate({})).toBe(3);
+    expect(expressionTreeFromString('2*(1+(2+2))').evaluate({})).toBe(10);
+  });
 });
