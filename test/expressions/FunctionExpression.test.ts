@@ -5,7 +5,7 @@ import OperatorExpression from '../../src/expressions/OperatorExpression';
 
 it('calls the function matching the name on child\'s value', () => {
   const expression = new FunctionExpression('foo', new NumericExpression(7));
-  const spy = jest.fn(() => 14)
+  const spy = jest.fn(() => 14);
   expect(expression.evaluate({}, { foo: spy })).toBe(14);
   expect(spy).toHaveBeenCalledWith(7);
 });

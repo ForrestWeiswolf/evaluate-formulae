@@ -1,18 +1,12 @@
 import Expression from './Expression';
+import ParentheticalExpression from './ParentheticalExpression';
 
-class FunctionExpression implements Expression {
-  child?: Expression;
-
+class FunctionExpression extends ParentheticalExpression {
   name: string;
 
-  private closed: boolean;
-
   constructor(name: string, child?: Expression, closed: boolean = false) {
+    super(child, closed);
     this.name = name;
-    if (child) {
-      this.child = child;
-    }
-    this.closed = closed;
   }
 
   close(): FunctionExpression {
@@ -38,10 +32,6 @@ class FunctionExpression implements Expression {
       throw new Error('Attempted to evaluate empty parens');
     }
     return functions![this.name](this.child.evaluate(definitions));
-  }
-
-  getVariables(): Set<string> {
-    return this.child?.getVariables() || new Set();
   }
 }
 

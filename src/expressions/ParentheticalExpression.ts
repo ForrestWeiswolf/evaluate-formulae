@@ -3,7 +3,7 @@ import Expression from './Expression';
 class ParentheticalExpression implements Expression {
   child?: Expression;
 
-  private closed: boolean;
+  closed: boolean;
 
   constructor(child?: Expression, closed = false) {
     if (child) {
