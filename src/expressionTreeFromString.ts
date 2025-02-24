@@ -26,10 +26,8 @@ const expressionTreeFromString = (expression: string): Expression => {
       tree = tree ? tree.insert(new ParentheticalExpression()) : new ParentheticalExpression();
     } else if (tree instanceof ParentheticalExpression && tokens[i] === ')') {
       tree = tree.close();
-    } else if (tree instanceof OperatorExpression) {
-      tree = tree ? tree.insert(expressionFromToken(tokens[i])) : expressionFromToken(tokens[i]);
     } else {
-      tree = tree ? tree.insert(expressionFromToken(tokens[i])) : expressionFromToken(tokens[0]);
+      tree = tree ? tree.insert(expressionFromToken(tokens[i])) : expressionFromToken(tokens[i]);
     }
   }
 
