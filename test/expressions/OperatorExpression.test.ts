@@ -1,7 +1,7 @@
-import NumericExpression from '../src/NumericExpression';
-import OperatorExpression from '../src/OperatorExpression';
-import VariableExpression from '../src/VariableExpression';
-import ParentheticalExpression from '../src/ParentheticalExpression';
+import NumericExpression from '../../src/expressions/NumericExpression';
+import OperatorExpression from '../../src/expressions/OperatorExpression';
+import VariableExpression from '../../src/expressions/VariableExpression';
+import ParentheticalExpression from '../../src/expressions/ParentheticalExpression';
 
 it('throws an error if created with a non-operator', () => {
   expect(() => {

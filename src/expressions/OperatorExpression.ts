@@ -1,5 +1,5 @@
 import type Expression from './Expression';
-import operations from './operations';
+import operations from '../operations';
 import ParentheticalExpression from './ParentheticalExpression';
 
 class OperatorExpression implements Expression {

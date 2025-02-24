@@ -1,4 +1,4 @@
-import Expression from './Expression';
+import Expression from './expressions/Expression';
 import expressionTreeFromString from './expressionTreeFromString';
 
 type DependencyTableEntry = { key: string, tree: Expression };

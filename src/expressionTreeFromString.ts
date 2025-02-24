@@ -1,8 +1,8 @@
-import Expression from './Expression';
-import NumericExpression from './NumericExpression';
-import OperatorExpression from './OperatorExpression';
-import ParentheticalExpression from './ParentheticalExpression';
-import VariableExpression from './VariableExpression';
+import Expression from './expressions/Expression';
+import NumericExpression from './expressions/NumericExpression';
+import OperatorExpression from './expressions/OperatorExpression';
+import ParentheticalExpression from './expressions/ParentheticalExpression';
+import VariableExpression from './expressions/VariableExpression';
 import operations from './operations';
 import tokenize from './tokenize';
 

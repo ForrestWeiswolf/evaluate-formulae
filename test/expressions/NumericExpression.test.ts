@@ -1,5 +1,5 @@
-import NumericExpression from '../src/NumericExpression';
-import OperatorExpression from '../src/OperatorExpression';
+import NumericExpression from '../../src/expressions/NumericExpression';
+import OperatorExpression from '../../src/expressions/OperatorExpression';
 
 it('evaluates to the value it was constructed with', () => {
   const expression = new NumericExpression(7);

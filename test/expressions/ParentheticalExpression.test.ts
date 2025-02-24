@@ -1,7 +1,7 @@
-import ParentheticalExpression from '../src/ParentheticalExpression';
-import NumericExpression from '../src/NumericExpression';
-import VariableExpression from '../src/VariableExpression';
-import OperatorExpression from '../src/OperatorExpression';
+import ParentheticalExpression from '../../src/expressions/ParentheticalExpression';
+import NumericExpression from '../../src/expressions/NumericExpression';
+import VariableExpression from '../../src/expressions/VariableExpression';
+import OperatorExpression from '../../src/expressions/OperatorExpression';
 
 it('evaluates to its child\'s value', () => {
   const expression = new ParentheticalExpression(new NumericExpression(7));
