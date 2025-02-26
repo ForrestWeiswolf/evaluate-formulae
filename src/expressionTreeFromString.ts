@@ -25,6 +25,11 @@ const expressionTreeFromString = (expression: string): Expression => {
   for (let i = 0; i < tokens.length; i++) {
     if (tokens[i] === '(') {
       tree = tree ? tree.insert(new ParentheticalExpression()) : new ParentheticalExpression();
+    } else if (tokens[i].includes('(')) {
+      const functionName = tokens[i].slice(0, -1);
+      tree = tree
+        ? tree.insert(new FunctionExpression(functionName))
+        : new FunctionExpression(functionName);
     } else if (tree instanceof ParentheticalExpression && tokens[i] === ')') {
       tree = tree.close();
     } else {
