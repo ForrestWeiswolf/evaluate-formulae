@@ -1,3 +1,4 @@
+import { FunctionDefinitions } from '../types';
 import Expression from './Expression';
 
 class ParentheticalExpression implements Expression {
@@ -27,10 +28,7 @@ class ParentheticalExpression implements Expression {
     return new ParentheticalExpression(this.child.insert(node));
   }
 
-  evaluate(
-    variables: Record<string, number> = {},
-    functions: Record<string, (arg: number) => number> = {},
-  ): number {
+  evaluate(variables: Record<string, number> = {}, functions: FunctionDefinitions = {}): number {
     if (!this.child) {
       throw new Error('Attempted to evaluate empty parens');
     }

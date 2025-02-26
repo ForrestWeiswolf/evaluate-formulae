@@ -1,6 +1,7 @@
 import type Expression from './Expression';
 import operations from '../operations';
 import ParentheticalExpression from './ParentheticalExpression';
+import { FunctionDefinitions } from '../types';
 
 class OperatorExpression implements Expression {
   operation: string;
@@ -42,10 +43,7 @@ class OperatorExpression implements Expression {
     return new OperatorExpression(this.operation, [...this.children, node]);
   }
 
-  evaluate(
-    variables: Record<string, number>,
-    functions: Record<string, (arg: number) => number> = {},
-  ): number {
+  evaluate(variables: Record<string, number>, functions: FunctionDefinitions = {}): number {
     switch (this.operation) {
       case '+':
         return this.children[0].evaluate(variables, functions)

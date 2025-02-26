@@ -1,6 +1,8 @@
+import { FunctionDefinitions } from '../types';
+
 interface Expression {
   evaluate: (
-    variables: Record<string, number>, functions?: Record<string, (arg: number) => number>
+    variables: Record<string, number>, functions?: FunctionDefinitions
   ) => number
   insert: (node: Expression) => Expression
   getVariables: () => Set<string>

@@ -19,6 +19,14 @@ describe('evaluateFormulae', () => {
     expect(evaluateFormulae({ foo: '-1*-1' })).toEqual({ foo: 1 });
   });
 
+  it('evaluates expressions with parentheses', () => {
+    expect(evaluateFormulae({ foo: '(5+5+1)*2' })).toEqual({ foo: 22 });
+  });
+
+  it('evaluates expressions with custom fuctions', () => {
+    expect(evaluateFormulae({ foo: 'double(5)' }, { double: (x) => x * 2 })).toEqual({ foo: 10 });
+  });
+
   it('provides results of evaluating one expression as a variable to later ones', () => {
     expect(evaluateFormulae({ foo: '0', bar: 'foo+1' })).toEqual({ foo: 0, bar: 1 });
   });
