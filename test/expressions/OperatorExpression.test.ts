@@ -45,20 +45,28 @@ describe('evaluate', () => {
     });
   });
 
-  it('passes along variable definitions to VariableExpression children', () => {
+  it('passes along variable and function definitions to VariableExpression children', () => {
+    const evaluateSpy = jest.spyOn(VariableExpression.prototype, 'evaluate');
+
+    const definitions = { variables: { foo: 1, bar: 2 }, functions: { baz: () => 2 } };
     const expression = new OperatorExpression('+', [
       new VariableExpression('foo'),
       new VariableExpression('bar'),
     ]);
-    expect(expression.evaluate({ foo: 1, bar: 2 })).toBe(3);
+    expect(expression.evaluate(definitions.variables, definitions.functions)).toBe(3);
+    expect(evaluateSpy).toHaveBeenCalledWith(definitions.variables, definitions.functions);
   });
 
-  it('passes along variable definitions to OperatorExpression children', () => {
+  it('passes along variable and function definitions to OperatorExpression children', () => {
+    const evaluateSpy = jest.spyOn(VariableExpression.prototype, 'evaluate');
+
+    const definitions = { variables: { foo: 1, bar: 2 }, functions: { baz: () => 2 } };
     const expression = new OperatorExpression('+', [
       new VariableExpression('foo'),
       new OperatorExpression('*', [new VariableExpression('bar'), new NumericExpression(2)]),
     ]);
-    expect(expression.evaluate({ foo: 1, bar: 2 })).toBe(5);
+    expect(expression.evaluate(definitions.variables, definitions.functions)).toBe(5);
+    expect(evaluateSpy).toHaveBeenCalledWith(definitions.variables, definitions.functions);
   });
 });
 

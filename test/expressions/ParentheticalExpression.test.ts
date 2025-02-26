@@ -8,9 +8,17 @@ it('evaluates to its child\'s value', () => {
   expect(expression.evaluate()).toBe(7);
 });
 
-it('passes definitions to its child\'s evaluate', () => {
-  const expression = new ParentheticalExpression(new VariableExpression('a'));
-  expect(expression.evaluate({ a: 2 })).toBe(2);
+it('passes along variable and function definitions to child', () => {
+  const evaluateSpy = jest.spyOn(OperatorExpression.prototype, 'evaluate');
+
+  const definitions = { variables: { a: 1, b: 2 }, functions: { foo: () => 2 } };
+  const expression = new ParentheticalExpression(new OperatorExpression('+', [
+    new NumericExpression(1), new NumericExpression(2),
+  ]));
+
+  expression.evaluate(definitions.variables, definitions.functions);
+
+  expect(evaluateSpy).toHaveBeenCalledWith(definitions.variables, definitions.functions);
 });
 
 it('getVariables returns child\'s variables', () => {

@@ -1,4 +1,5 @@
 import Expression from './expressions/Expression';
+import FunctionExpression from './expressions/FunctionExpression';
 import NumericExpression from './expressions/NumericExpression';
 import OperatorExpression from './expressions/OperatorExpression';
 import ParentheticalExpression from './expressions/ParentheticalExpression';

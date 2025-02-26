@@ -31,7 +31,7 @@ class FunctionExpression extends ParentheticalExpression {
     if (!this.child) {
       throw new Error('Attempted to evaluate empty parens');
     }
-    return functions![this.name](this.child.evaluate(definitions));
+    return functions![this.name](this.child.evaluate(definitions, functions));
   }
 }
 

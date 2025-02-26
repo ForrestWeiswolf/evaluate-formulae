@@ -27,11 +27,14 @@ class ParentheticalExpression implements Expression {
     return new ParentheticalExpression(this.child.insert(node));
   }
 
-  evaluate(definitions: Record<string, number> = {}) {
+  evaluate(
+    variables: Record<string, number> = {},
+    functions: Record<string, (arg: number) => number> = {},
+  ): number {
     if (!this.child) {
       throw new Error('Attempted to evaluate empty parens');
     }
-    return this.child.evaluate(definitions);
+    return this.child.evaluate(variables, functions);
   }
 
   getVariables(): Set<string> {
