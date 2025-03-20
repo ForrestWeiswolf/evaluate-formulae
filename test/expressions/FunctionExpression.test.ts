@@ -10,10 +10,9 @@ it('calls the function matching the name on child\'s value', () => {
   expect(spy).toHaveBeenCalledWith(7);
 });
 
-it('getVariables returns child\'s variables', () => {
-  const expression = new FunctionExpression('foo', new VariableExpression('a'));
-
-  expect(expression.getVariables()).toEqual(new Set(['a']));
+it('throws an error if no function matching the name is provided', () => {
+  const expression = new FunctionExpression('foo', new NumericExpression(7));
+  expect(() => expect(expression.evaluate({}, {}))).toThrow("No definition for function 'foo'");
 });
 
 it('passes along variable and function definitions to child', () => {
@@ -27,6 +26,12 @@ it('passes along variable and function definitions to child', () => {
   expression.evaluate(definitions.variables, definitions.functions);
 
   expect(evaluateSpy).toHaveBeenCalledWith(definitions.variables, definitions.functions);
+});
+
+it('getVariables returns child\'s variables', () => {
+  const expression = new FunctionExpression('foo', new VariableExpression('a'));
+
+  expect(expression.getVariables()).toEqual(new Set(['a']));
 });
 
 describe('insert', () => {

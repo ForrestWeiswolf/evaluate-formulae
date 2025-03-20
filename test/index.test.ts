@@ -39,6 +39,10 @@ describe('evaluateFormulae', () => {
     expect(() => evaluateFormulae({ foo: 'never', bar: 'nonesuch' })).toThrow("No definition for variable(s) 'never', 'nonesuch'");
   });
 
+  it('throws an error if a nonexistent function is referenced', () => {
+    expect(() => evaluateFormulae({ foo: 'differentiate(5)' }, { double: (x) => x * 2 })).toThrow("No definition for function 'differentiate'");
+  });
+
   it('provides referenced expressions as variables regardless of expression order', () => {
     expect(evaluateFormulae({ a: 'b+1', b: '1', c: 'b+a' })).toEqual({ a: 2, b: 1, c: 3 });
   });
