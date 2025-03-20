@@ -18,6 +18,8 @@ const evaluateFormulae = (
         queue.push({ key, tree });
       }
     });
+
+    delete dependencyTable[varName];
   };
 
   Object.keys(formulae).forEach((key) => {
@@ -37,6 +39,11 @@ const evaluateFormulae = (
     const [{ key, tree }] = queue.splice(0, 1);
     result[key] = tree.evaluate(result, functions);
     markDependencyResolved(key);
+  }
+
+  if (Object.keys(dependencyTable).length > 0) {
+    const formattedVariableList = Object.keys(dependencyTable).map((k) => `'${k}'`);
+    throw new Error(`No definition for variable(s) ${formattedVariableList.join(', ')}`);
   }
 
   return result;

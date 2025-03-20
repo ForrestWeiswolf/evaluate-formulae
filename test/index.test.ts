@@ -31,8 +31,12 @@ describe('evaluateFormulae', () => {
     expect(evaluateFormulae({ foo: '0', bar: 'foo+1' })).toEqual({ foo: 0, bar: 1 });
   });
 
-  xit('throws an error if a nonexistent formula is referenced as a variable', () => {
-    expect(() => evaluateFormulae({ foo: 'nonesuch' })).toThrow("No definition for 'nonesuch'");
+  it('throws an error if a nonexistent formula is referenced as a variable', () => {
+    expect(() => evaluateFormulae({ foo: '1', bar: 'nonesuch' })).toThrow("No definition for variable(s) 'nonesuch'");
+  });
+
+  it('throws an informative error if multiple nonexistent formulae are referenced', () => {
+    expect(() => evaluateFormulae({ foo: 'never', bar: 'nonesuch' })).toThrow("No definition for variable(s) 'never', 'nonesuch'");
   });
 
   it('provides referenced expressions as variables regardless of expression order', () => {
